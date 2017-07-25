@@ -1,5 +1,7 @@
 package com.adrian.kotlinwithdagger2.app.di
 
+import android.content.Context
+import android.content.SharedPreferences
 import com.adrian.kotlinwithdagger2.app.MyApplication
 import dagger.Module
 import dagger.Provides
@@ -18,4 +20,13 @@ class AppModule(val myApplication: MyApplication) {
         return myApplication
     }
 
+    @Singleton
+    @Provides
+    fun providesContext(): Context = myApplication
+
+    @Singleton
+    @Provides
+    fun providesSharedPreferences(): SharedPreferences {
+        return myApplication.getSharedPreferences("PREFS", Context.MODE_PRIVATE)
+    }
 }
